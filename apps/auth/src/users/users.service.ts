@@ -36,7 +36,7 @@ export class UsersService {
 
   async validateUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({ email });
-    const passwordIsValid = await argon2.verify(password, user.password);
+    const passwordIsValid = await argon2.verify(user.password,password);
     if (!passwordIsValid) {
       throw new UnauthorizedException('Credentials are not valid.');
     }
